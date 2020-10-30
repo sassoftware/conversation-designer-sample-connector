@@ -1,0 +1,17 @@
+# Ignore files/folders in same directory as the .gitignore file
+/*
+
+# Allow our source files
+!/javascript/
+!/routes/
+!/stylesheets/
+!/views/
+!/.gitignore
+!/package.json
+!/package-lock.json
+!/README.md
+!/sample-connector.js
+!/CONTRIBUTING.md
+!/ContributorAgreement.txt
+!/LICENSE
+!/SUPPORT.md

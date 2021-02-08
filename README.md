@@ -22,12 +22,15 @@ Clone this project locally and run:
 Then update the following values in `javascript/chat.js` with values that match your environment:
 
 - baseURL - this value points to the base url of your SAS environment (ex: if SAS Conversation Designer was deployed to http://yourcompany.com/SASConversationDesigner, then set this value to http://yourcompany.com)
-- sasUserId - this is the user id that the connector will use to authenticate with your SAS environment
-- sasPassword - the password for the userId defined above
 - botId - this is the unique identifier for the bot you want the connector to communicate with (ex: e3b1f772-1562-4c8c-a60e-1ee20684ce4b)
 - revisionId - this is the unique identifier for the bot revision within your bot that the connector will communicate with; this could be a delegate value (ex: @published, @latest) or the UUID (ex: aa1e4567-e89b-12d3-a456-426614158700)
+- authToken - the authentication token used to communicate with your SAS environment
 
-Note: While userId and password are included above, the code can be changed to authenticate in other ways. More information about authentication can be found in the [SAS REST APIs: Authentication & Authorization](https://developer.sas.com/reference/auth) documentation.
+For more information about authentication and how to obtain a token see the following:
+
+- [SAS REST APIs: Authentication & Authorization](https://developer.sas.com/reference/auth)
+- [Authentication to SAS Viya: a couple of approaches](https://blogs.sas.com/content/sgf/2019/01/25/authentication-to-sas-viya/)
+- [Building custom apps on top of SAS Viya](https://blogs.sas.com/content/tag/build-custom-app/)
 
 Other values in `javascript/chat.js` that can be changed to better reflect your connector and the user using it:
 
@@ -55,12 +58,12 @@ This project is licensed under the [Apache 2.0 License](LICENSE).
 
 ## Additional Resources
 
-[SAS Conversation Designer Documentation](https://go.documentation.sas.com/?cdcId=cdesignercdc&cdcVersion=v_001&docsetId=cdesignerwlcm&docsetTarget=home.htm&locale=en)
+[SAS Conversation Designer Documentation](https://go.documentation.sas.com/?cdcId=cdesignercdc&cdcVersion=default&docsetId=cdesignerwlcm&docsetTarget=home.htm&locale=en)
 
 # FAQ
 
 ## How do I find the botId for my bot?
-The most common way to find the botId for a bot is using the Natural Language Conversations API (ex: if SAS Conversation Designer was deployed to http://yourcompany.com/SASConversationDesigner, then the base URL for the API would typically be http://yourcompany.com/naturaLanguageConversations). Once you have found the base URL, you can then call GET on the bots endpoint (ex: http://yourcompany.com/naturalLanguageConversations/bot). This will return a list of all bots that currently exist and you search the list for your bot. Once you find it the botId value is shown as 'id'. 
+The most common way to find the botId for a bot is using the Natural Language Conversations API (ex: if SAS Conversation Designer was deployed to http://yourcompany.com/SASConversationDesigner, then the base URL for the API would typically be http://yourcompany.com/naturalLanguageConversations). Once you have found the base URL, you can then call GET on the bots endpoint (ex: http://yourcompany.com/naturalLanguageConversations/bot). This will return a list of all bots that currently exist and you search the list for your bot. Once you find it the botId value is shown as 'id'. 
 
 Here is an example:
 

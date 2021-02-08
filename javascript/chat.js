@@ -9,8 +9,7 @@
 const baseURL = "REPLACE_THIS_VALUE";
 const botId = "REPLACE_THIS_VALUE";
 const revisionId = "REPLACE_THIS_VALUE";
-const sasUserId = "REPLACE_THIS_VALUE";
-const sasPassword = "REPLACE_THIS_VALUE";
+const authToken = "REPLACE_THIS_VALUE";
 
 /**
  * These values can also be changed based on the user using the bot and the name of the connector.
@@ -22,11 +21,9 @@ const connectorName = "mySampleConnector";
 /**
  * These values are all defined/updated at runtime to reflect the current session.
  */
-let authToken = null;
 let sessionId = null;
 let nextEventsLink = null;
 let chatContent = null;
-
 
 /**
  * This function is called when a new session should be started. This normally happens when the page is loaded.
@@ -85,15 +82,15 @@ let createMessageElements = function (messageEvent) {
         messageEvent.bodyElements.forEach(bodyElement => {
             switch (bodyElement.type) {
                 case "textElement":
-                    chatContent.innerHTML += "<div class='chatRow " + messageStyle + "'><span>" + bodyElement.text + "</span></div>";
+                    chatContent.innerHTML += "<div class='chatRow text " + messageStyle + "'><span>" + bodyElement.text + "</span></div>";
                     break;
                 case "htmlElement":
-                    chatContent.innerHTML += "<div class='chatRow " + messageStyle + "'>" + bodyElement.text + "</div>";
+                    chatContent.innerHTML += "<div class='chatRow html " + messageStyle + "'>" + bodyElement.text + "</div>";
                     break;
             }
         });
     } else if (messageEvent.text) {
-        chatContent.innerHTML += "<div class='chatRow " + messageStyle + "'><span>" + messageEvent.text + "</span></div>";
+        chatContent.innerHTML += "<div class='chatRow text " + messageStyle + "'><span>" + messageEvent.text + "</span></div>";
     }
 
     if (messageEvent.attachments && messageEvent.attachments.length) {
@@ -120,7 +117,7 @@ let createMessageElements = function (messageEvent) {
             let buttonId = messageEvent.id+"_"+buttonIndex++;
             buttonDivContents += "<input type='button' id='" + buttonId + "' value='" + button.eventText + "' onclick='sendUserInputEvent(\""+button.eventText+"\")'/>";
         });
-        chatContent.innerHTML += "<div>"+buttonDivContents+"</div>";
+        chatContent.innerHTML += "<div class='chatButtons'>"+buttonDivContents+"</div>";
     }
 };
 
@@ -163,7 +160,7 @@ let sendUserInputEvent = function (userInput) {
 
 
 /**
- * This function checks if an authorization token is already loaded and if not loads one.
+ * This function checks if an authorization token is available.
  *
  * NOTE: If this connector is meant to be long running then additional code needs to be added to handle
  * expired tokens.
@@ -171,25 +168,11 @@ let sendUserInputEvent = function (userInput) {
  * @returns {Promise}
  */
 let checkToken = function () {
-    //check if the authorization token has already been loaded
+    //check if the authorization token is available
     if (authToken) {
         return Promise.resolve();
     } else {
-        return fetch(baseURL + "/SASLogon/oauth/token", {
-            method: "POST",
-            body: "grant_type=password&username=" + sasUserId + "&password=" + sasPassword,
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-                "Authorization": "Basic c2FzLmVjOg=="
-            }
-        }).then(function (response) {
-            return response.json();
-        })
-            .then((response) => {
-                authToken = "bearer " + response.access_token;
-            }, (error) => {
-                console.error(error);
-            });
+        console.error("Authentication token not provided.");
     }
 };
 
@@ -207,11 +190,9 @@ let createSession = function (successHandler) {
         // this information is stored with the session and used to identify where/how the session was created
         let data = {
             "connectorName": connectorName,
-            "state": {
-                "sessionProperties": {
-                    "userName": userName,
-                    "userId": userId
-                }
+            "properties": {
+				"userName": userName,
+				"userId": userId
             }
         };
 

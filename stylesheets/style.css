@@ -41,7 +41,19 @@ html, body {
     border: 1px solid rgba(51, 163, 255, 0.5);
 }
 
+.botResponse{
+    max-width: 75%;
+}
+
 .botResponse span {
+    padding: 0.5rem;
+    border-radius: 0 0.75rem 0.75rem 0.75rem;
+    background-color: rgba(176, 184, 195, 0.1);
+    color: rgb(42, 48, 55);
+    border: 1px solid #b0b8c3;
+}
+
+.botResponse.html {
     padding: 0.5rem;
     border-radius: 0 0.75rem 0.75rem 0.75rem;
     background-color: rgba(176, 184, 195, 0.1);
@@ -56,8 +68,11 @@ html, body {
     flex-basis: auto;
     min-height: auto;
     min-width: auto;
-    display: flex;
     margin: 0.5rem 0;
+}
+
+.chatRow.text {
+    display: flex;
 }
 
 .chatRow.userInput {
@@ -67,4 +82,8 @@ html, body {
 .chatRow svg{
     width: 15rem;
     height: 15rem;
+}
+
+.chatButtons input[type="button"]:not(:first-child) {
+    margin-left: 10px;
 }

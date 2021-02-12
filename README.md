@@ -24,7 +24,7 @@ Then update the following values in `javascript/chat.js` with values that match 
 - baseURL - this value points to the base url of your SAS environment (ex: if SAS Conversation Designer was deployed to http://yourcompany.com/SASConversationDesigner, then set this value to http://yourcompany.com)
 - botId - this is the unique identifier for the bot you want the connector to communicate with (ex: e3b1f772-1562-4c8c-a60e-1ee20684ce4b)
 - revisionId - this is the unique identifier for the bot revision within your bot that the connector will communicate with; this could be a delegate value (ex: @published, @latest) or the UUID (ex: aa1e4567-e89b-12d3-a456-426614158700)
-- authToken - the authentication token used to communicate with your SAS environment
+- authToken - the authentication token used to communicate with your SAS environment (ex: Bearer eyJhbG...)
 
 For more information about authentication and how to obtain a token see the following:
 
@@ -104,4 +104,4 @@ Here is an example:
       "name": "My best revision",
       ...
 
-The 'id' value (ex: e09881bb-3206-4d73-a9c0-a6280202c188) should be used as the botId mentioned above. 
+The 'id' value (ex: e09881bb-3206-4d73-a9c0-a6280202c188) should be used as the revisionId mentioned above. 

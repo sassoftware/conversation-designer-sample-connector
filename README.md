@@ -63,7 +63,7 @@ This project is licensed under the [Apache 2.0 License](LICENSE).
 # FAQ
 
 ## How do I find the botId for my bot?
-The most common way to find the botId for a bot is using the Natural Language Conversations API (ex: if SAS Conversation Designer was deployed to http://yourcompany.com/SASConversationDesigner, then the base URL for the API would typically be http://yourcompany.com/naturalLanguageConversations). Once you have found the base URL, you can then call GET on the bots endpoint (ex: http://yourcompany.com/naturalLanguageConversations/bot). This will return a list of all bots that currently exist and you search the list for your bot. Once you find it the botId value is shown as 'id'. 
+The most common way to find the botId for a bot is using the Natural Language Conversations API (ex: if SAS Conversation Designer was deployed to http://yourcompany.com/SASConversationDesigner, then the base URL for the API would typically be http://yourcompany.com/naturalLanguageConversations). Once you have found the base URL, you can then call GET on the bots endpoint (ex: http://yourcompany.com/naturalLanguageConversations/bots). This will return a list of all bots that currently exist and you search the list for your bot. Once you find it the botId value is shown as 'id'. 
 
 Here is an example:
 
@@ -88,7 +88,7 @@ There are three options for revisionId:
 - @latest - this value points to the latest/draft version of your bot, then each time a new bot latest/draft is created, the connector automatically updates to use the new latest/draft bot version
 - specific revision id - this value points to a specific version the bot and will not change as versions are published or created
 
-To find a specific revision id, follow the above instructions on how to get the botId. Then you can use the API to get access to all of the revisions available for a bot. This can be done by calling GET on the revisions endpoint (ex: http://yourcompany.com/naturalLanguageConversations/bot/{botId}/revisions). This will return a list of all revisions that currently exist for your bot. Then find the revision you are interested in and the revision value is shown as 'id'.
+To find a specific revision id, follow the above instructions on how to get the botId. Then you can use the API to get access to all of the revisions available for a bot. This can be done by calling GET on the revisions endpoint (ex: http://yourcompany.com/naturalLanguageConversations/bots/{botId}/revisions). This will return a list of all revisions that currently exist for your bot. Then find the revision you are interested in and the revision value is shown as 'id'.
 
 Here is an example:
 
@@ -104,4 +104,8 @@ Here is an example:
       "name": "My best revision",
       ...
 
-The 'id' value (ex: e09881bb-3206-4d73-a9c0-a6280202c188) should be used as the revisionId mentioned above. 
+The 'id' value (ex: e09881bb-3206-4d73-a9c0-a6280202c188) should be used as the revisionId mentioned above.
+
+## I'm getting a CORS error. How do I fix it?
+
+When your sample connector is running in a different domain than SAS Viya, you will need to update the SAS Viya CORS configuration to allow access. Instructions can be found on [developers.sas.com](https://developer.sas.com/reference/cors).

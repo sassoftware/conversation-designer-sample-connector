@@ -1,3 +1,7 @@
+# Archived repository
+
+### Notice: The functionality provided in this repository is no longer shipped with SAS software. Hence, the repository will no long accept submissions or offer support.
+
 # conversation-designer-sample-connector
 
 ## Overview
